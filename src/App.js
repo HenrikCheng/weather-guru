@@ -27,13 +27,13 @@ function App() {
         console.log(result);
       });
   };
+
   useEffect(() => {
     getWeather(lat, long);
   }, [lat, long]);
 
   return (
     <div className="App">
-      <Weather weatherData={data} />
       <h1>Your position is:</h1>
       {long && lat ? (
         <p>
@@ -50,6 +50,7 @@ function App() {
         </div>
       )}
       <button onClick={getWeather}>Refresh</button>
+      <Weather weatherData={data} />
     </div>
   );
 }

@@ -1,10 +1,14 @@
 import React from "react";
 import "./styles.css";
 
-const CardExampleCard = (props) => {
-  const { timezone } = props;
-  console.log("Weatherdata is:" + timezone);
-  return <div className="header card">{timezone}</div>;
+const weather = (props) => {
+  console.log("props is:" + JSON.stringify(props));
+  return (
+    <div className="">
+      Location: {JSON.stringify(props)}
+      Weather:
+    </div>
+  );
 };
 
-export default CardExampleCard;
+export default weather;
