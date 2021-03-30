@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/weather-guru/static/css/main.02363f50.chunk.css",
+    "main.js": "/weather-guru/static/js/main.b98d1bd8.chunk.js",
+    "main.js.map": "/weather-guru/static/js/main.b98d1bd8.chunk.js.map",
+    "runtime-main.js": "/weather-guru/static/js/runtime-main.c9557a37.js",
+    "runtime-main.js.map": "/weather-guru/static/js/runtime-main.c9557a37.js.map",
+    "static/js/2.9347f86e.chunk.js": "/weather-guru/static/js/2.9347f86e.chunk.js",
+    "static/js/2.9347f86e.chunk.js.map": "/weather-guru/static/js/2.9347f86e.chunk.js.map",
+    "static/js/3.47befcdc.chunk.js": "/weather-guru/static/js/3.47befcdc.chunk.js",
+    "static/js/3.47befcdc.chunk.js.map": "/weather-guru/static/js/3.47befcdc.chunk.js.map",
+    "index.html": "/weather-guru/index.html",
+    "static/css/main.02363f50.chunk.css.map": "/weather-guru/static/css/main.02363f50.chunk.css.map",
+    "static/js/2.9347f86e.chunk.js.LICENSE.txt": "/weather-guru/static/js/2.9347f86e.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.c9557a37.js",
+    "static/js/2.9347f86e.chunk.js",
+    "static/css/main.02363f50.chunk.css",
+    "static/js/main.b98d1bd8.chunk.js"
+  ]
+}
