@@ -1,14 +1,18 @@
 import React from "react";
 import "./styles.css";
 
-const weather = (props) => {
-  console.log("props is:" + JSON.stringify(props));
-  return (
-    <div className="">
-      Location: {JSON.stringify(props)}
-      Weather:
-    </div>
-  );
+const weather = (weatherData) => {
+  const { timezone } = weatherData;
+  console.log("props is:" + JSON.stringify(weatherData));
+  const text = JSON.stringify(weatherData);
+
+  // console.log("total " + keys.length + " keys: " + keys);
+
+  // var myObject = JSON.parse(props);
+  // console.log("myobject" + myObject);
+
+  return <div>weather {timezone}</div>;
+  // return <div className="">{JSON.stringify(weatherData)}</div>;
 };
 
 export default weather;

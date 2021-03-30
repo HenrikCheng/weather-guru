@@ -1,56 +1,58 @@
 import "./App.css";
 import React, { useEffect, useState } from "react";
-import Weather from "./components/weather";
+import Loader from "./components/loader";
 
 function App() {
   const [lat, setLat] = useState();
   const [long, setLong] = useState();
-  const [data, setData] = useState();
+  const [data, setData] = useState([]);
+  const [isLoadingGPS, setisLoadingGPS] = useState(true);
+  const [isLoadingWeatherdata, setIsLoadingWeatherdata] = useState(true);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(function (position) {
       setLat(position.coords.latitude);
       setLong(position.coords.longitude);
     });
+    setisLoadingGPS(false);
+  }, []);
 
-    console.log("Latitude is:", lat);
-    console.log("Longitude is:", long);
-  }, [lat, long]);
+  useEffect(() => {
+    if (isLoadingGPS === false) {
+      getWeather(lat, long);
+    }
+  }, [long]); //lat should be here also but long is checked last
 
   const getWeather = async (lat, long) => {
     await fetch(
-      `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&exclude=minutely,hourly&appid=cd23d653ce8d3a3cfbbdcacad590ce4d`
+      `${process.env.REACT_APP_API_URL}/onecall?lat=${lat}&lon=${long}&units=metric&exclude=minutely,hourly&appid=${process.env.REACT_APP_API_KEY}`
     )
       .then((res) => res.json())
       .then((result) => {
         setData(result);
         console.log(result);
-      });
+      })
+      setIsLoadingWeatherdata(false)
   };
 
-  useEffect(() => {
-    getWeather(lat, long);
-  }, [lat, long]);
+  const onClickHandler = () => getWeather(lat, long);
 
   return (
     <div className="App">
       <h1>Your position is:</h1>
       {long && lat ? (
         <p>
-          Lat: {lat} <br /> long: {long}
+          Lat: {Math.round(lat * 1000) / 1000} <br /> long: {Math.round(long * 1000) / 1000}
         </p>
       ) : (
-        <div className="loaderContainer">
-          <span>Getting your data</span>
-          <div className="spinner">
-            <div className="bounce1"></div>
-            <div className="bounce2"></div>
-            <div className="bounce3"></div>
-          </div>
-        </div>
+        <Loader />
       )}
-      <button onClick={getWeather}>Refresh</button>
-      <Weather weatherData={data} />
+      <button onClick={onClickHandler}>Refresh</button>
+      Location: {data.timezone}
+      <div>Current weather: {!isLoadingWeatherdata && data.current.temp}</div>
+      {/* <div>Future weather: {data.map(data => {
+        return <div>{data.current}</div>
+      })}</div> */}
     </div>
   );
 }
