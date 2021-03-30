@@ -31,8 +31,8 @@ function App() {
       .then((result) => {
         setData(result);
         console.log(result);
-      })
-      setIsLoadingWeatherdata(false)
+      });
+    setIsLoadingWeatherdata(false);
   };
 
   const onClickHandler = () => getWeather(lat, long);
@@ -41,18 +41,28 @@ function App() {
     <div className="App">
       <h1>Your position is:</h1>
       {long && lat ? (
-        <p>
-          Lat: {Math.round(lat * 1000) / 1000} <br /> long: {Math.round(long * 1000) / 1000}
-        </p>
+        <>
+          <div>Latitude: {Math.round(lat * 1000) / 1000}</div>
+          <div>Longitude: {Math.round(long * 1000) / 1000}</div>
+        </>
       ) : (
         <Loader />
       )}
       <button onClick={onClickHandler}>Refresh</button>
-      Location: {data.timezone}
-      <div>Current weather: {!isLoadingWeatherdata && data.current.temp}</div>
-      {/* <div>Future weather: {data.map(data => {
-        return <div>{data.current}</div>
-      })}</div> */}
+      <div>Location: {data.timezone} </div>
+      <div>
+        Current temperature: {!isLoadingWeatherdata && data.current.temp + " Celcius. " + data.current.weather[0].description}
+      </div>
+      <div>
+        Sunrise:{" "}
+        {!isLoadingWeatherdata &&
+          new Date(data.current.sunrise * 1000).toLocaleTimeString()}{" "}
+      </div>
+      <div>
+        Sunset:{" "}
+        {!isLoadingWeatherdata &&
+          new Date(data.current.sunset * 1000).toLocaleTimeString()}{" "}
+      </div>
     </div>
   );
 }
