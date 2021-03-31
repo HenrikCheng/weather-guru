@@ -1,5 +1,5 @@
 import "./styles.css";
-import Loader from "./Loader";
+import Loader from "./Loader1";
 
 const PositionCard = (props) => {
   const { lon, lat, data, onClickHandler } = props;
