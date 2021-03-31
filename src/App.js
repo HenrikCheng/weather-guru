@@ -32,7 +32,7 @@ function App() {
       .then((res) => res.json())
       .then((result) => {
         setData(result);
-        // console.log(result);
+        console.log(result);
       });
     setIsLoadingWeatherdata(false);
   };
@@ -63,13 +63,19 @@ function App() {
         />
         <WeatherCard data={data} isLoadingWeatherdata={isLoadingWeatherdata} />
       </div>
-      {/* <div className="cardContainer">
-        {!isLoadingWeatherdata &&
+      <div className="cardContainer">
+        {/* {!isLoadingWeatherdata &&
           data.daily.forEach((day) => {
-            console.log(day)
-            return <div>Hello World</div>;
-          })}
-      </div> */}
+            console.log(day);
+            <div>Hello World</div>;
+          })} */}
+        {/* {!isLoadingWeatherdata && data.daily.map((day) => <p>{day.temp}</p>)} */}
+        {/* {!isLoadingWeatherdata &&
+          data.daily.map((day, index) => <div>{day.temp}</div>)} */}
+        {/* {data.daily.map((day) => (
+          <div>{day.temp}</div>
+        ))} */}
+      </div>
     </div>
   );
 }
