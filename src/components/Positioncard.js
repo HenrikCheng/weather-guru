@@ -1,19 +1,25 @@
 import "./styles.css";
+import Loader from "./Loader";
 
 const PositionCard = (props) => {
-  console.log("position card" + props)
+  const { lon, lat, data, onClickHandler } = props;
+  console.log("position card" + props);
   return (
     <>
       <div className="card">
         <div className="card-body">
-          <h5 className="card-title">Card title</h5>
-          <p className="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </p>
-          <a href="#" className="btn btn-primary">
-            Go somewhere
-          </a>
+          <h5 className="card-title">{data.timezone}</h5>
+          {lon && lat ? (
+            <>
+              <div>Latitude: {Math.round(lat * 1000) / 1000}</div>
+              <div>Longitude: {Math.round(lon * 1000) / 1000}</div>
+            </>
+          ) : (
+            <Loader />
+          )}
+          <button onClick={onClickHandler} className="btn btn-primary">
+            Refresh
+          </button>
         </div>
       </div>
     </>

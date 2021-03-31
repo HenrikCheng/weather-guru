@@ -1,6 +1,5 @@
 import "./App.css";
 import React, { useEffect, useState } from "react";
-import Loader from "./components/Loader";
 import WeatherCard from "./components/Weathercard";
 import PositionCard from "./components/Positioncard";
 
@@ -23,7 +22,7 @@ function App() {
     if (isLoadingGPS === false) {
       getWeather(lat, lon);
     }
-  }, [lon]); //lat should be here also but long is checked last
+  }, [lon]);
 
   const getWeather = async (lat, lon) => {
     await fetch(
@@ -32,7 +31,7 @@ function App() {
       .then((res) => res.json())
       .then((result) => {
         setData(result);
-        console.log(result);
+        // console.log(result);
       });
     setIsLoadingWeatherdata(false);
   };
@@ -41,23 +40,12 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Your position is: {data.timezone} </h1>
-      {lon && lat ? (
-        <>
-          <div>Latitude: {Math.round(lat * 1000) / 1000}</div>
-          <div>Longitude: {Math.round(lon * 1000) / 1000}</div>
-        </>
-      ) : (
-        <Loader />
-      )}
-      <button onClick={onClickHandler}>Refresh</button>
-
       <div className="cardContainer">
         <PositionCard
           lat={lat}
           lon={lon}
           data={data}
-          isLoadingWeatherdata={isLoadingWeatherdata}
+          isLoadingGPS={isLoadingGPS}
           onClickHandler={onClickHandler}
         />
         <WeatherCard data={data} isLoadingWeatherdata={isLoadingWeatherdata} />
