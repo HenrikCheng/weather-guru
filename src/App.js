@@ -1,6 +1,7 @@
 import "./App.css";
 import React, { useEffect, useState } from "react";
-import Loader from "./components/loader";
+import Loader from "./components/Loader";
+// import WeatherCard from ""
 
 function App() {
   const [lat, setLat] = useState();
@@ -51,7 +52,11 @@ function App() {
       <button onClick={onClickHandler}>Refresh</button>
       <div>Location: {data.timezone} </div>
       <div>
-        Current temperature: {!isLoadingWeatherdata && data.current.temp + " Celcius. " + data.current.weather[0].description}
+        Current temperature:{" "}
+        {!isLoadingWeatherdata &&
+          data.current.temp +
+            " Celcius. " +
+            data.current.weather[0].description}
       </div>
       <div>
         Sunrise:{" "}

@@ -1,7 +1,7 @@
 import React from "react";
 import "./styles.css";
 
-const weather = (weatherData) => {
+const Weathercard = (weatherData) => {
   const { timezone } = weatherData;
   console.log("props is:" + JSON.stringify(weatherData));
   const text = JSON.stringify(weatherData);
@@ -15,4 +15,4 @@ const weather = (weatherData) => {
   // return <div className="">{JSON.stringify(weatherData)}</div>;
 };
 
-export default weather;
+export default Weathercard;
