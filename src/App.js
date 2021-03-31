@@ -1,7 +1,7 @@
 import "./App.css";
 import React, { useEffect, useState } from "react";
 import Loader from "./components/Loader";
-// import WeatherCard from ""
+import WeatherCard from "./components/Weathercard";
 
 function App() {
   const [lat, setLat] = useState();
@@ -40,7 +40,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Your position is:</h1>
+      <h1>Your position is: {data.timezone} </h1>
       {long && lat ? (
         <>
           <div>Latitude: {Math.round(lat * 1000) / 1000}</div>
@@ -50,7 +50,9 @@ function App() {
         <Loader />
       )}
       <button onClick={onClickHandler}>Refresh</button>
-      <div>Location: {data.timezone} </div>
+
+      <WeatherCard />
+
       <div>
         Current temperature:{" "}
         {!isLoadingWeatherdata &&
