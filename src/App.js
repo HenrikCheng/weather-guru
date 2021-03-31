@@ -50,6 +50,7 @@ function App() {
             alt=""
             className="pandaLogo"
           />
+          <span className="m-3">WeatherPanda</span>
         </a>
       </nav>
       <div className="cardContainer">
