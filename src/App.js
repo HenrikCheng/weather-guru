@@ -2,6 +2,7 @@ import "./App.css";
 import React, { useEffect, useState } from "react";
 import WeatherCard from "./components/Weathercard";
 import PositionCard from "./components/Positioncard";
+import PandaLogo from "./images/panda.png";
 
 function App() {
   const [lat, setLat] = useState();
@@ -39,7 +40,18 @@ function App() {
   const onClickHandler = () => getWeather(lat, lon);
 
   return (
-    <div className="App">
+    <div className="App bg-secondary" style={{ height: "100vh" }}>
+      <nav className="navbar navbar-dark bg-dark">
+        <a className="navbar-brand" href="#">
+          <img
+            src={PandaLogo}
+            width="30"
+            height="30"
+            alt=""
+            className="pandaLogo"
+          />
+        </a>
+      </nav>
       <div className="cardContainer">
         <PositionCard
           lat={lat}

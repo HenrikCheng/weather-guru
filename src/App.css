@@ -61,3 +61,8 @@
 .cardContainer > * {
   width: 300px;
 }
+
+.pandaLogo {
+  -webkit-filter: invert(1);
+  filter: invert(1);
+  }

@@ -28,9 +28,9 @@ const Weathercard = (props) => {
             new Date(data.current.sunset * 1000).toLocaleTimeString() +
               " o'clock"}
         </p>
-        <button href="#" className="btn btn-primary">
+        {/* <button href="#" className="btn btn-primary">
           Refresh
-        </button>
+        </button> */}
       </div>
     </div>
   );

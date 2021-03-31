@@ -3,7 +3,6 @@ import Loader from "./Loader";
 
 const PositionCard = (props) => {
   const { lon, lat, data, onClickHandler } = props;
-  console.log("position card" + props);
   return (
     <>
       <div className="card">
@@ -17,9 +16,9 @@ const PositionCard = (props) => {
           ) : (
             <Loader />
           )}
-          <button onClick={onClickHandler} className="btn btn-primary">
+          {/* <button onClick={onClickHandler} className="btn btn-primary">
             Refresh
-          </button>
+          </button> */}
         </div>
       </div>
     </>
