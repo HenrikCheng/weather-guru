@@ -1,6 +1,6 @@
 {
   "homepage": "http://HenrikCheng.github.io/weather-panda",
-  "name": "weather-guru",
+  "name": "weather-panda",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
