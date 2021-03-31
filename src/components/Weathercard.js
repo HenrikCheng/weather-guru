@@ -1,29 +1,36 @@
 import "./styles.css";
 
 const Weathercard = (props) => {
-  const { timezone, current } = props;
-
-  // console.log("props is:" + JSON.stringify(weatherData));
-  // const text = JSON.stringify(weatherData);
-
-  // console.log("total " + keys.length + " keys: " + keys);
-
-  // var myObject = JSON.parse(props);
-  // console.log("myobject" + myObject);
-
-  // return <div>weather {timezone}</div>;
-  // return <div className="">{JSON.stringify(weatherData)}</div>;
+  const { data, isLoadingWeatherdata } = props;
   return (
     <div className="card">
       <div className="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
+        <h5 className="card-title">Right now</h5>
+        <p className="card-title">
+          {!isLoadingWeatherdata &&
+            data.current.temp + " °C. " + data.current.weather[0].description}
         </p>
-        <a href="#" class="btn btn-primary">
-          Go somewhere
-        </a>
+        <p className="card-text">
+          Feels like: {!isLoadingWeatherdata && data.current.feels_like + " °C"}
+        </p>
+        <p className="card-text">
+          Humidity: {!isLoadingWeatherdata && data.current.humidity + " %"}
+        </p>
+        <p className="card-text">
+          Sunrise:{" "}
+          {!isLoadingWeatherdata &&
+            new Date(data.current.sunrise * 1000).toLocaleTimeString() +
+              " o'clock"}
+        </p>
+        <p className="card-text">
+          Sunset:{" "}
+          {!isLoadingWeatherdata &&
+            new Date(data.current.sunset * 1000).toLocaleTimeString() +
+              " o'clock"}
+        </p>
+        <button href="#" className="btn btn-primary">
+          Refresh
+        </button>
       </div>
     </div>
   );
