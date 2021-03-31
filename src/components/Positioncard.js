@@ -15,6 +15,7 @@ const PositionCard = (props) => {
             </>
           ) : (
             <Loader />
+            // <></>
           )}
         </div>
       </div>
