@@ -40,7 +40,7 @@ function App() {
   const onClickHandler = () => getWeather(lat, lon);
 
   return (
-    <div className="App bg-secondary" style={{ height: "100vh" }}>
+    <div className="App bg-secondary" style={{ height: "100%" }}>
       <nav className="navbar navbar-dark bg-dark">
         <a className="navbar-brand" href="#">
           <img
@@ -61,6 +61,15 @@ function App() {
           isLoadingGPS={isLoadingGPS}
           onClickHandler={onClickHandler}
         />
+        <WeatherCard data={data} isLoadingWeatherdata={isLoadingWeatherdata} />
+      </div>
+      <div className="cardContainer">
+        <WeatherCard data={data} isLoadingWeatherdata={isLoadingWeatherdata} />
+        <WeatherCard data={data} isLoadingWeatherdata={isLoadingWeatherdata} />
+        <WeatherCard data={data} isLoadingWeatherdata={isLoadingWeatherdata} />
+        <WeatherCard data={data} isLoadingWeatherdata={isLoadingWeatherdata} />
+        <WeatherCard data={data} isLoadingWeatherdata={isLoadingWeatherdata} />
+        <WeatherCard data={data} isLoadingWeatherdata={isLoadingWeatherdata} />
         <WeatherCard data={data} isLoadingWeatherdata={isLoadingWeatherdata} />
       </div>
     </div>
