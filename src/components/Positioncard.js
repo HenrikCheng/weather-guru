@@ -16,9 +16,6 @@ const PositionCard = (props) => {
           ) : (
             <Loader />
           )}
-          {/* <button onClick={onClickHandler} className="btn btn-primary">
-            Refresh
-          </button> */}
         </div>
       </div>
     </>

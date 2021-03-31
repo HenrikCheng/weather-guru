@@ -1,21 +1,10 @@
 import "./styles.css";
 
-const WeatherEmoji = (props) => {
-  const { weatherDescription } = props;
-
-  const EmojiSelector = (weatherDescription) => {
-    switch (weatherDescription) {
-      case "light rain":
-        return (
-          <span role="img" aria-label="light rain">
-            🌧️{" "}
-          </span>
-        );
-      default:
-        return <></>;
-    }
-  };
-  return <>{EmojiSelector(weatherDescription)}</>;
-};
+const WeatherEmoji = (props) => (
+  <img
+    src={`http://openweathermap.org/img/w/${props.weatherDescription.icon}.png`}
+    alt="weather icon"
+  />
+);
 
 export default WeatherEmoji;
