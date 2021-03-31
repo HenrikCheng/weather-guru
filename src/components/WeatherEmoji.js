@@ -8,16 +8,13 @@ const WeatherEmoji = (props) => {
       case "light rain":
         return (
           <span role="img" aria-label="light rain">
-            🌧️
-            {" "}
+            🌧️{" "}
           </span>
         );
       default:
         return <></>;
     }
   };
-
-  console.log(weatherDescription);
   return <>{EmojiSelector(weatherDescription)}</>;
 };
 

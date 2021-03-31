@@ -40,7 +40,7 @@ function App() {
   const onClickHandler = () => getWeather(lat, lon);
 
   return (
-    <div className="App bg-secondary" style={{ height: "100%" }}>
+    <div className="App bg-secondary">
       <nav className="navbar navbar-dark bg-dark">
         <a className="navbar-brand" href="#">
           <img
@@ -63,15 +63,13 @@ function App() {
         />
         <WeatherCard data={data} isLoadingWeatherdata={isLoadingWeatherdata} />
       </div>
-      <div className="cardContainer">
-        <WeatherCard data={data} isLoadingWeatherdata={isLoadingWeatherdata} />
-        <WeatherCard data={data} isLoadingWeatherdata={isLoadingWeatherdata} />
-        <WeatherCard data={data} isLoadingWeatherdata={isLoadingWeatherdata} />
-        <WeatherCard data={data} isLoadingWeatherdata={isLoadingWeatherdata} />
-        <WeatherCard data={data} isLoadingWeatherdata={isLoadingWeatherdata} />
-        <WeatherCard data={data} isLoadingWeatherdata={isLoadingWeatherdata} />
-        <WeatherCard data={data} isLoadingWeatherdata={isLoadingWeatherdata} />
-      </div>
+      {/* <div className="cardContainer">
+        {!isLoadingWeatherdata &&
+          data.daily.forEach((day) => {
+            console.log(day)
+            return <div>Hello World</div>;
+          })}
+      </div> */}
     </div>
   );
 }
