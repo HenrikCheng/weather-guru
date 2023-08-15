@@ -25,33 +25,62 @@ function App() {
     }
   }, [lon]);
 
+  const isCacheValid = (timestamp) => {
+    const currentTime = new Date().getTime();
+    const cacheTime = parseInt(timestamp, 10);
+    return currentTime - cacheTime < 3600000; // 1 hour in milliseconds
+  };
+
   const getWeather = async (lat, lon) => {
-    await fetch(
-      `${process.env.REACT_APP_API_URL}/onecall?lat=${lat}&lon=${lon}&units=metric&exclude=minutely,hourly&appid=${process.env.REACT_APP_API_KEY}`
-    )
-      .then((res) => res.json())
-      .then((result) => {
-        setData(result);
-        console.log(result);
-      });
-    setIsLoadingWeatherdata(false);
+    const cachedData = localStorage.getItem("weatherData");
+
+    if (cachedData) {
+      const { timestamp, data: cachedResult } = JSON.parse(cachedData);
+      if (isCacheValid(timestamp)) {
+        setData(cachedResult);
+        setIsLoadingWeatherdata(false);
+        return;
+      }
+    }
+
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/onecall?lat=${lat}&lon=${lon}&units=metric&exclude=minutely,hourly&appid=${process.env.REACT_APP_API_KEY}`
+      );
+      const result = await response.json();
+      setData(result);
+
+      // Update the cache with the new data and timestamp
+      const cacheData = {
+        timestamp: new Date().getTime(),
+        data: result,
+      };
+      localStorage.setItem("weatherData", JSON.stringify(cacheData));
+
+      setIsLoadingWeatherdata(false);
+    } catch (error) {
+      console.error("Error fetching weather data:", error);
+      setIsLoadingWeatherdata(false);
+    }
   };
 
   const onClickHandler = () => getWeather(lat, lon);
 
+  useEffect(() => {
+    console.log("data: ", data);
+  }, [data]);
+
   return (
     <div className="App bg-secondary">
       <nav className="navbar navbar-dark bg-dark">
-        <a className="navbar-brand" href="#">
-          <img
-            src={PandaLogo}
-            width="30"
-            height="30"
-            alt=""
-            className="pandaLogo"
-          />
-          <span className="m-3">WeatherPanda</span>
-        </a>
+        <img
+          src={PandaLogo}
+          width="30"
+          height="30"
+          alt=""
+          className="pandaLogo"
+        />
+        <span className="m-3 text-light">WeatherPanda</span>
       </nav>
       <div className="cardContainer">
         <PositionCard
@@ -61,21 +90,25 @@ function App() {
           isLoadingGPS={isLoadingGPS}
           onClickHandler={onClickHandler}
         />
-        <WeatherCard data={data} isLoadingWeatherdata={isLoadingWeatherdata} />
+        <WeatherCard
+          data={data.current}
+          isLoadingWeatherdata={isLoadingWeatherdata}
+        />
       </div>
-      <div className="cardContainer">
-        {/* {!isLoadingWeatherdata &&
-          data.daily.forEach((day) => {
-            console.log(day);
-            <div>Hello World</div>;
-          })} */}
-        {/* {!isLoadingWeatherdata && data.daily.map((day) => <p>{day.temp}</p>)} */}
-        {/* {!isLoadingWeatherdata &&
-          data.daily.map((day, index) => <div>{day.temp}</div>)} */}
-        {/* {data.daily.map((day) => (
-          <div>{day.temp}</div>
-        ))} */}
-      </div>
+      {data &&
+        data.daily &&
+        data.daily.length > 0 &&
+        data.daily.map((day, index) => {
+          return (
+            <div key={index} className="cardContainer">
+              {index}
+              <WeatherCard
+                data={day}
+                isLoadingWeatherdata={isLoadingWeatherdata}
+              />
+            </div>
+          );
+        })}
     </div>
   );
 }
