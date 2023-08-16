@@ -66,10 +66,6 @@ function App() {
 
   const onClickHandler = () => getWeather(lat, lon);
 
-  useEffect(() => {
-    console.log("data: ", data);
-  }, [data]);
-
   return (
     <div className="App bg-secondary">
       <nav className="navbar navbar-dark bg-dark">
@@ -93,22 +89,22 @@ function App() {
         <WeatherCard
           data={data.current}
           isLoadingWeatherdata={isLoadingWeatherdata}
+          isCurrent={true}
         />
-      </div>
-      {data &&
-        data.daily &&
-        data.daily.length > 0 &&
-        data.daily.map((day, index) => {
-          return (
-            <div key={index} className="cardContainer">
-              {index}
+        {data &&
+          data.daily &&
+          data.daily.length > 0 &&
+          data.daily.map((day, index) => {
+            return (
               <WeatherCard
                 data={day}
                 isLoadingWeatherdata={isLoadingWeatherdata}
+                isCurrent={false}
+                key={index}
               />
-            </div>
-          );
-        })}
+            );
+          })}
+      </div>
     </div>
   );
 }
