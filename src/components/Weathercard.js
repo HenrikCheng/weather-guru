@@ -41,34 +41,30 @@ const Weathercard = (props) => {
     return <span>Today</span>;
   };
 
-  if (isLoadingWeatherdata) {
-    return <></>;
-  }
-
-  if (!data) {
-    return <></>;
-  }
-
-  return (
-    <div className="card" style={{ lineHeight: "75%" }}>
-      <div className="card-body pt-1">
-        <h5 className="card-title d-flex align-items-center justify-content-between mb-0">
-          <HeaderSection />
-          <WeatherEmoji weatherDescription={data.weather[0]} />
-        </h5>
-        <FeelsLikeSection />
-        <p className="card-text" style={{ paddingTop: "20px" }}>
-          🌊 Humidity: {data.humidity + " %"}
-        </p>
-        <p className="card-text">
-          🌅 Sunrise: {new Date(data.sunrise * 1000).toLocaleTimeString()}
-        </p>
-        <p className="card-text">
-          🌇 Sunset: {new Date(data.sunset * 1000).toLocaleTimeString()}
-        </p>
+  if (data && !isLoadingWeatherdata) {
+    return (
+      <div className="card" style={{ lineHeight: "75%" }}>
+        <div className="card-body pt-1">
+          <h5 className="card-title d-flex align-items-center justify-content-between mb-0">
+            <HeaderSection />
+            <WeatherEmoji weatherDescription={data.weather[0]} />
+          </h5>
+          <FeelsLikeSection />
+          <p className="card-text" style={{ paddingTop: "20px" }}>
+            🌊 Humidity: {data.humidity + " %"}
+          </p>
+          <p className="card-text">
+            🌅 Sunrise: {new Date(data.sunrise * 1000).toLocaleTimeString()}
+          </p>
+          <p className="card-text">
+            🌇 Sunset: {new Date(data.sunset * 1000).toLocaleTimeString()}
+          </p>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
+
+  return null;
 };
 
 export default Weathercard;
