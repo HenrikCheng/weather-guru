@@ -4,27 +4,6 @@ import WeatherEmoji from "./WeatherEmoji";
 const Weathercard = (props) => {
   const { data, isLoadingWeatherdata, isCurrent } = props;
 
-  const TemperatureSection = () => {
-    if (isCurrent) {
-      return (
-        <p>
-          {data.temp} °C. {data.weather[0].description}.
-        </p>
-      );
-    } else if (typeof data.temp === "object") {
-      return (
-        <>
-          <h5>🌡 Temperature</h5>
-          {Object.entries(data.temp).map(([time, temp]) => (
-            <p key={time}>
-              Time: {time}, Temperature: {temp} °C
-            </p>
-          ))}
-        </>
-      );
-    }
-  };
-
   const FeelsLikeSection = () => {
     if (isCurrent) {
       return (
@@ -36,9 +15,9 @@ const Weathercard = (props) => {
         <div>
           <h5>😌 Feels like</h5>
           {orderedKeys.map((time) => (
-            <p key={time}>
-              Time: {time.charAt(0).toUpperCase() + time.slice(1)}, Temperature:{" "}
-              {data.feels_like[time]} °C
+            <p key={time} className="card-text">
+              {`${time.charAt(0).toUpperCase() + time.slice(1)}, Feels like:
+              ${data.feels_like[time]} °C`}
             </p>
           ))}
         </div>
@@ -62,13 +41,10 @@ const Weathercard = (props) => {
           {isCurrent && <span>Right now</span>}
           <WeatherEmoji weatherDescription={data.weather[0]} />
         </h5>
-        {/* <div className="card-title">
-          <TemperatureSection />
-        </div> */}
-        <div className="card-text">
-          <FeelsLikeSection />
-        </div>
-        <p className="card-text">🌊 Humidity: {data.humidity + " %"}</p>
+        <FeelsLikeSection />
+        <p className="card-text" style={{ paddingTop: "20px" }}>
+          🌊 Humidity: {data.humidity + " %"}
+        </p>
         <p className="card-text">
           🌅 Sunrise: {new Date(data.sunrise * 1000).toLocaleTimeString()}
         </p>
