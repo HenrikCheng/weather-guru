@@ -40,7 +40,6 @@ function App() {
       if (isCacheValid(timestamp)) {
         setData(cachedResult);
         setIsLoadingWeatherdata(false);
-        console.log("Cache is valid");
         return;
       }
     }
@@ -68,7 +67,6 @@ function App() {
 
   const onClickHandler = () => getWeather(lat, lon);
 
-  console.log("🚀 ~ file: App.js:11 ~ App ~ data:", data);
   return (
     <div className="App bg-secondary">
       <nav className="navbar navbar-dark bg-dark">

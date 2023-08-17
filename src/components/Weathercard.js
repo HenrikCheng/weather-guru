@@ -15,14 +15,19 @@ const Weathercard = (props) => {
         <p className="card-text">😌 Feels like: {data.feels_like + " °C"}</p>
       );
     } else if (typeof data.feels_like === "object") {
-      const orderedKeys = ["morn", "day", "eve", "night"];
+      const timePeriods = {
+        morn: "Morning",
+        day: "Day",
+        eve: "Evening",
+        night: "Night",
+      };
+      const orderedEmojis = ["🌄", "🏞️", "🌆", "🌌"];
       return (
         <div>
-          <h5>😌 Feels like</h5>
-          {orderedKeys.map((time) => (
+          {Object.keys(timePeriods).map((time, index) => (
             <p key={time} className="card-text">
-              {`${time.charAt(0).toUpperCase() + time.slice(1)}, Feels like:
-              ${data.feels_like[time]} °C`}
+              {`${orderedEmojis[index]} ${timePeriods[time]} feels like:
+            ${data.feels_like[time]} °C`}
             </p>
           ))}
         </div>
