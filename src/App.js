@@ -104,6 +104,7 @@ function App() {
                 isLoadingWeatherdata={isLoadingWeatherdata}
                 isCurrent={false}
                 key={index}
+                index={index}
               />
             );
           })}

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const useWeekday = (initialDate) => {
+const useWeekday = (initialDate, offset = 0) => {
   const [weekday, setWeekday] = useState("");
 
   useEffect(() => {
@@ -13,20 +13,12 @@ const useWeekday = (initialDate) => {
       "Friday",
       "Saturday",
     ];
-    const dayIndex = initialDate.getDay();
+    const dayIndex = (initialDate.getDay() + offset) % 7;
 
     setWeekday(daysOfWeek[dayIndex]);
-  }, [initialDate]);
+  }, [initialDate, offset]);
 
   return weekday;
 };
 
-// Usage
-function App() {
-  const today = new Date();
-  const weekday = useWeekday(today);
-
-  return weekday;
-}
-
-export default App;
+export default useWeekday;

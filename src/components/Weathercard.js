@@ -1,8 +1,13 @@
 import "./styles.css";
 import WeatherEmoji from "./WeatherEmoji";
+import useWeekday from "../hooks/useWeekday";
 
 const Weathercard = (props) => {
-  const { data, isLoadingWeatherdata, isCurrent } = props;
+  const { data, isLoadingWeatherdata, isCurrent, index } = props;
+
+  const today = new Date();
+  const offset = index;
+  const todayWeekday = useWeekday(today, offset);
 
   const FeelsLikeSection = () => {
     if (isCurrent) {
@@ -26,6 +31,16 @@ const Weathercard = (props) => {
     return <></>;
   };
 
+  const HeaderSection = () => {
+    if (isCurrent) {
+      return <span>Right now</span>;
+    }
+    if (index) {
+      return <span>{todayWeekday}</span>;
+    }
+    return <span>Today</span>;
+  };
+
   if (isLoadingWeatherdata) {
     return <></>;
   }
@@ -38,7 +53,7 @@ const Weathercard = (props) => {
     <div className="card" style={{ lineHeight: "75%" }}>
       <div className="card-body pt-1">
         <h5 className="card-title d-flex align-items-center justify-content-between mb-0">
-          {isCurrent && <span>Right now</span>}
+          <HeaderSection />
           <WeatherEmoji weatherDescription={data.weather[0]} />
         </h5>
         <FeelsLikeSection />
